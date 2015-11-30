@@ -54,7 +54,7 @@ var EventHandlers = {
         curY: posY
       }
     });
-    e.preventDefault();
+    //e.preventDefault();
   },
   swipeMove: function (e) {
     if (!this.state.dragging) {
@@ -79,7 +79,7 @@ var EventHandlers = {
       swipeLeft: swipeLeft,
       trackStyle: this.getCSS(swipeLeft)
     });
-    e.preventDefault();
+    //e.preventDefault();
   },
   swipeEnd: function (e) {
     e.preventDefault();
