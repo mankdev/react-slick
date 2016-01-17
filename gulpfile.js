@@ -54,7 +54,7 @@ gulp.task('server', ['copy', 'sass'], function (callback) {
     contentBase: './build',
     hot: true,
     debug: true
-  }).listen(8000, process.env.HOST_IP || 'localhost', function (err, result) {
+  }).listen(8000, process.env.HOST_IP || '192.168.100.5', function (err, result) {
   });
 });
 

@@ -176,10 +176,6 @@ var Slider = React.createClass({
         <div
           ref='list'
           className='slick-list'
-          onMouseDown={this.swipeStart}
-          onMouseMove={this.state.dragging ? this.swipeMove: null}
-          onMouseUp={this.swipeEnd}
-          onMouseLeave={this.state.dragging ? this.swipeEnd: null}
           onTouchStart={this.swipeStart}
           onTouchMove={this.state.dragging ? this.swipeMove: null}
           onTouchEnd={this.swipeEnd}

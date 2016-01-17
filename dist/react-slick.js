@@ -352,10 +352,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        {
 	          ref: 'list',
 	          className: 'slick-list',
-	          onMouseDown: this.swipeStart,
-	          onMouseMove: this.state.dragging ? this.swipeMove : null,
-	          onMouseUp: this.swipeEnd,
-	          onMouseLeave: this.state.dragging ? this.swipeEnd : null,
 	          onTouchStart: this.swipeStart,
 	          onTouchMove: this.state.dragging ? this.swipeMove : null,
 	          onTouchEnd: this.swipeEnd,
@@ -1338,6 +1334,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  swipeStart: function (e) {
 	    var touches, posX, posY;
 
+	    if (this.props.children.length === this.props.slidesToShow) {
+	      return;
+	    }
+
 	    if ((this.props.swipe === false) || ('ontouchend' in document && this.props.swipe === false)) {
 	      return;
 	    } else if (this.props.draggable === false && e.type.indexOf('mouse') !== -1) {
@@ -1571,7 +1571,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  slideHandler: function (index, sync, dontAnimate) {
 	    // Functionality of animateSlide and postSlide is merged into this function
-	    // console.log('slideHandler', index);
+	     console.log('slideHandler', index);
 	    var targetSlide, currentSlide;
 	    var targetLeft, currentLeft;
 
@@ -1589,20 +1589,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    targetSlide = index;
 	    if (targetSlide < 0) {
-	      if (this.state.slideCount % this.props.slidesToScroll !== 0) {
+	      if(this.props.infinite === false) {
+	        currentSlide = 0;
+	      } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
 	        currentSlide = this.state.slideCount - (this.state.slideCount % this.props.slidesToScroll);
 	      } else {
 	        currentSlide = this.state.slideCount + targetSlide;
 	      }
 	    } else if (targetSlide >= this.state.slideCount) {
-	      if (this.state.slideCount % this.props.slidesToScroll !== 0) {
+	      if(this.props.infinite === false) {
+	        currentSlide = this.state.slideCount - this.props.slidesToShow;
+	      } else if (this.state.slideCount % this.props.slidesToScroll !== 0) {
 	        currentSlide = 0;
 	      } else {
 	        currentSlide = targetSlide - this.state.slideCount;
 	      }
+	    } else if (targetSlide >= (this.state.slideCount - this.props.slidesToShow) && this.props.infinite === false) {
+	      currentSlide = this.state.slideCount - this.props.slidesToShow;
 	    } else {
 	      currentSlide = targetSlide;
 	    }
+
+	    console.log('qq', this.props.children.length, this.props.slidesToShow);
 
 	    targetLeft = this.getLeft(targetSlide, this.state);
 	    currentLeft = this.getLeft(currentSlide, this.state);

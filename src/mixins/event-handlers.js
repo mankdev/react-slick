@@ -38,6 +38,10 @@ var EventHandlers = {
   swipeStart: function (e) {
     var touches, posX, posY;
 
+    if (this.props.children.length === this.props.slidesToShow) {
+      return;
+    }
+
     if ((this.props.swipe === false) || ('ontouchend' in document && this.props.swipe === false)) {
       return;
     } else if (this.props.draggable === false && e.type.indexOf('mouse') !== -1) {
