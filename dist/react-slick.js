@@ -1571,7 +1571,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  slideHandler: function (index, sync, dontAnimate) {
 	    // Functionality of animateSlide and postSlide is merged into this function
-	     console.log('slideHandler', index);
+	    // console.log('slideHandler', index);
 	    var targetSlide, currentSlide;
 	    var targetLeft, currentLeft;
 
@@ -1609,8 +1609,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      currentSlide = targetSlide;
 	    }
-
-	    console.log('qq', this.props.children.length, this.props.slidesToShow);
 
 	    targetLeft = this.getLeft(targetSlide, this.state);
 	    currentLeft = this.getLeft(currentSlide, this.state);
