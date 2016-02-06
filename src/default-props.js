@@ -33,7 +33,8 @@ var defaultProps = {
     // waitForAnimate: true,
     afterChange: null,
     nextArrow: null,
-    prevArrow: null
+    prevArrow: null,
+    dragThreshold: 0
 };
 
 module.exports = defaultProps;
