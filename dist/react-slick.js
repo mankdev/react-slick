@@ -1366,13 +1366,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var swipeLeft;
 	    var curLeft, positionOffset;
 	    var touchObject = this.state.touchObject;
+	    var dragThreshold = this.props.dragThreshold;
 
 	    curLeft = this.getLeft(this.state.currentSlide);
 	    touchObject.curX = (e.touches) ? e.touches[0].pageX : e.clientX;
 	    touchObject.curY = (e.touches) ? e.touches[0].pageY : e.clientY;
 	    touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(touchObject.curX - touchObject.startX, 2)));
 
-	    positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
+	    if (touchObject.swipeLength > dragThreshold) {
+	      positionOffset = (this.props.rtl === false ? 1 : -1) * (touchObject.curX > touchObject.startX ? 1 : -1);
+	    }
 	    swipeLeft = curLeft + touchObject.swipeLength * positionOffset;
 	    this.setState({
 	      touchObject: touchObject,
@@ -1961,7 +1964,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // waitForAnimate: true,
 	    afterChange: null,
 	    nextArrow: null,
-	    prevArrow: null
+	    prevArrow: null,
+	    dragThreshold: 0
 	};
 
 	module.exports = defaultProps;
